@@ -14,23 +14,7 @@
                             <p>Welcome {{ Auth::user()->name }} !</p>
                             <br>
                             <div>
-                                {{--@foreach ($tweets as $tweet)
-                                    <p><strong>{{ $tweet->author }}</strong></p>
-                                    <div style="width: 75vw;">
-                                        <p style="word-break: break-all;">{{$tweet->content}}</p>
-                                    </div>
-                                    <p><strong>{{ $tweet->created_at }}</strong></p>
-                                    @if ( Auth::user()->name == $tweet->author)
-                                        <form action="deleteTweet" method="post">
-                                            <button type="submit" name="delete" value="{{$tweet->id}}" >Delete Tweet</button>
-                                        </form>
-                                    @endif
-                                    <br>
-                                    <br>
-                                @endforeach--}}
-                            </div>
-                            <div>
-                                <form action="/profile/postTweet" method="post">
+                                <form action="/addTweet" method="post">
                                     @csrf
                                     <input type="hidden" name="author" value="{{ Auth::user()->name }}">
                                     <textarea name="content" value="Content" style="width: 30vw; height: 20vh; display: block; resize: none;"></textarea>

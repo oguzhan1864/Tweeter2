@@ -19,8 +19,15 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index');
+//Route::get('/home', 'HomeController@show');
+
+Route::get('/home', 'FeedController@feed');
+
+Route::post('/addTweet', 'FeedController@addTweet');
+
+Route::get('/deleteTweet', 'FeedController@deleteTweet');
+
+Route::get('/feed', 'FeedController@feed');
 
 Route::get('/profile', 'ProfileController@index');
 
-Route::get('/feed', 'FeedController@index');
