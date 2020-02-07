@@ -10,6 +10,28 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'users';
+
+    function Profile() {
+        return $this->hasOne('App\Profile');
+    }
+
+    function Tweets() {
+        return $this->hasMany('App\Tweets');
+    }
+
+    function Likes() {
+        return $this->hasMany('App\Likes');
+    }
+
+    function Comments() {
+        return $this->hasMany('App\COmments');
+    }
+
+    function Relations() {
+        return $this->hasMany('App\Relations');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
