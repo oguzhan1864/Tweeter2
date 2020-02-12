@@ -11,21 +11,17 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
-
-//Route::get('/home', 'HomeController@show');
 
 Route::get('/home', 'FeedController@feed');
 
 Route::post('/addTweet', 'FeedController@addTweet');
 
-Route::get('/deleteTweet', 'FeedController@deleteTweet');
+Route::get('/deleteTweet/{id}', 'FeedController@deleteTweet');
+
+Route::get('/edit/{id}', 'FeedController@editTweet');
 
 Route::get('/feed', 'FeedController@feed');
 

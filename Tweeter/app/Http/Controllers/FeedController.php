@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tweets;
 use Illuminate\Http\Request;
 use Auth;
+use DB;
 
 class FeedController extends Controller
 {
@@ -42,19 +43,26 @@ class FeedController extends Controller
         $tweet->save();
 
         $result = \App\Tweets::all();
-            return redirect('/home');
+            return redirect('/feed');
     }
 
-    function deleteTweet(Request $request)
+    public function deleteTweet($id)
     {
-        $tweet = new \App\Tweets;
-        $tweet->tweets_id = Auth::tweet()->id;
-        $tweet->content = $request->content;
+        $tweet = \App\Tweets::find($id);
         $tweet->delete();
 
         $result = \App\Tweets::all();
-            return redirect('/home');
+            return redirect('/feed');
     }
 
+    public function editTweet(Request $request, $id)
+    {
+        $tweet = \App\Tweets::find($id);
+        $tweet->content = $request->content;
+        $tweet->save();
+
+        $result = \App\Tweets::find($id);
+            return redirect('/edit');
+    }
 
 }

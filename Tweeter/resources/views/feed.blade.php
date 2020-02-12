@@ -8,16 +8,16 @@ Tweets
 
 @foreach ($tweets as $tweet)
     <p>{{$tweet->tweet}}</p>
-    <p><strong>{{$tweet->users_name}}</strong></p>
+    <p>{{$tweet->users_name}}</p>
     <div style="width: 75vw;">
         <p style="word-break: break-all;">{{$tweet->content}}</p>
     </div>
-    <p><strong>{{ $tweet->created_at }}</strong></p>
-    <form action="/deleteTweet" method="get">
+    <p>{{ $tweet->created_at }}</p>
+    <form action="/deleteTweet/{{$tweet->id}}" method="get">
         @csrf
         <button name="id" type="submit" value="{{ $tweets }}">Delete Tweet</button>
     </form>
-    <form action="/editTweet" method="post">
+    <form action="/edit/{{$tweet->id}}" method="get">
         @csrf
         <button name="id" type="submit">Edit Tweet</button>
     </form>
