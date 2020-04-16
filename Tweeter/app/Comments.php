@@ -4,16 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comments extends Model
+class Comment extends Model
 {
-    protected $table = 'comments';
+    protected $fillable = ['body', 'user_id', 'tweeter_id', 'gif'];
 
-    function User() {
-        return $this->belongsTo('App\Users');
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
-    function Tweets() {
-        return $this->belongsTo('App\Tweets');
+    public function tweet()
+    {
+        return $this->belongsTo('App\Tweet');
     }
-
 }

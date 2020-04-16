@@ -3,20 +3,47 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
-class Tweets extends Model
+class Tweet extends Model
 {
-    protected $table = 'tweets';
 
-    function User() {
-        return $this->belongsTo('App\Users');
+    protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
-    function Comments() {
-        return $this->hasMany('App\Comments');
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
     }
 
-    function Likes() {
-        return $this->hasMany('App\Likes');
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
+    public function getLikedByUserAttribute()
+    {
+        $id = Auth::id();
+        $like = $this->likes->first(function ($row) use ($id) {
+            return $row->user_id === $id;
+        });
+
+        if ($like) return true;
+        return false;
+
+    }
+
+    public function attachment()
+    {
+        return $this->hasOne('App\Attachment');
+    }
+
+    public function path()
+    {
+        return '/tweets/' . $this->id;
     }
 }

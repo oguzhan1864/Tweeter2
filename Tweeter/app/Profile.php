@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-    protected $table = 'profile';
-
-    function User() {
-        return $this->belongsTo('App\Users');
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
+    public function followers()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
