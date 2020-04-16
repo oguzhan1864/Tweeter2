@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -16,6 +16,48 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="birthday" class="col-md-4 col-form-label text-md-right">{{ __('Birthday') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="birthday" type="date" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('name') }}" required autocomplete="birthday" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('Location') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ old('name') }}" required autocomplete="location" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="bio" class="col-md-4 col-form-label text-md-right">{{ __('Bio') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea id="bio" type="text" class="form-control @error('bio') is-invalid @enderror" name="bio" value="{{ old('name') }}" required autocomplete="bio" autofocus></textarea>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -74,4 +116,6 @@
         </div>
     </div>
 </div>
+    @include('layouts/footer')
+
 @endsection
