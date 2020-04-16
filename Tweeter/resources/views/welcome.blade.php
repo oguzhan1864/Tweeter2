@@ -4,52 +4,47 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Tweeter Welcome Page</title>
 
-        <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="shortcut icon" href="{{ asset('img/icon-logo.png') }}" type="image/x-icon" />
 
-        <!-- Styles -->
+
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background-color: #00aaec;
+                color: #0f87c4;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
             }
-
             .full-height {
                 height: 100vh;
             }
-
             .flex-center {
                 align-items: center;
                 display: flex;
                 justify-content: center;
             }
-
             .position-ref {
                 position: relative;
             }
-
             .top-right {
                 position: absolute;
                 right: 10px;
                 top: 18px;
             }
-
             .content {
                 text-align: center;
+                margin-top: 150px;
             }
-
             .title {
                 font-size: 84px;
             }
-
             .links > a {
-                color: #636b6f;
+                color: white;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -57,9 +52,19 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-
             .m-b-md {
                 margin-bottom: 30px;
+                color: white;
+            }
+            .marketing {
+                margin-top: 200px;
+            }
+            a {
+                color: white;
+                text-decoration: none;
+            }
+            h2 {
+                color: white;
             }
         </style>
     </head>
@@ -70,29 +75,27 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}"> <i class="fa fa-sign-in"></i> Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}"> <i class="fa fa-file"></i> Register</a>
                         @endif
                     @endauth
                 </div>
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="media">
+                    <img src="{{ asset('img/logo.png') }}" class="img-fluid" alt="logo" />
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="title m-b-md">
+                    Tweeter
+                </div>
+                <div class="">
+                    <h2> Welcome</h2>
+                </div>
+                <div class="marketing">
+                    <a href="marketing" target="_blank" class="text text-light"> <i class="fa fa-twitter"></i> Marketing</a>
                 </div>
             </div>
         </div>
