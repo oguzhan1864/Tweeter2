@@ -11,19 +11,47 @@
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+Route::get('/logout', function(){
+    Auth::logout();
+    return redirect('/login');
+});
 
-Route::get('/home', 'FeedController@feed');
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/addTweet', 'FeedController@addTweet');
+Route::post('/tweets/{tweet}/like', 'TweetController@like');
 
-Route::get('/deleteTweet/{id}', 'FeedController@deleteTweet');
+Route::post('/tweets/{tweet}/unlike', 'TweetController@unlike');
 
-Route::get('/edit/{id}', 'FeedController@editTweet');
+Route::get('/user/tweetlist', 'TweetController@tweetlist')->name('tweetlist');
 
-Route::get('/feed', 'FeedController@feed');
+Route::get('/user/tweetlist/{user}', 'TweetController@tweetlist')->name('usertweetlist');
 
-Route::get('/profile', 'ProfileController@index');
+Route::resource('/comments', 'CommentController');
 
+Route::post('/comments/{tweet}', 'CommentController@store');
+
+Route::get('/comments/create/{tweet}', 'CommentController@create');
+
+Route::resource('/profiles', 'ProfilesController');
+
+Route::get('/profiles/{user}', 'ProfilesController@index')->name('profile');
+
+Route::get('/user/following', 'FollowsController@following')->name('following');
+
+Route::get('/user/following/{user}', 'FollowsController@following')->name('userfollowing');
+
+Route::post('/follow/{user}', 'FollowsController@store');
+
+Route::get('/follow/{user}', 'FollowsController@store');
+
+Route::get('/user/followers', 'FollowsController@followers')->name('followers');
+
+Route::get('/user/followers/{user}', 'FollowsController@followers')->name('userfollowers');
+
+Route::get('/marketing', 'TweetController@marketing')->name('marketing');
