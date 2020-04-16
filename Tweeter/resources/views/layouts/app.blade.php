@@ -62,7 +62,7 @@
                                     <a class="dropdown-item" href="{{ route('tweetlist') }}"> My Tweets </a>
                                     <a class="dropdown-item" href="{{ route('following') }}"> Following </a>
                                     <a class="dropdown-item" href="{{ route('followers') }}"> Followers </a>
-                                    <a class="dropdown-item" href="{{ route('profile', ['user'=> Auth::user()->profile->id ]) }}"> Profile </a>
+                                    <a class="dropdown-item" href="{{ route('profile', ['users'=> Auth::users()->profile->id ]) }}"> Profile </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

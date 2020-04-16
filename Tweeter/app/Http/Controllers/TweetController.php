@@ -10,19 +10,12 @@ use Storage;
 
 class TweetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        // $tweets = \App\Tweet::orderBy('created_at', 'desc')->get();
 
         $tweets = \App\Tweet::latest()->paginate(20);
         $following = auth()->user()->following()->pluck('profile_user.profile_id')->toArray();
-
-        //dd($tweets[0]->user->follows);
 
         return view('tweets.index', compact('tweets', 'following'));
     }
@@ -33,23 +26,11 @@ class TweetController extends Controller
         return $tweets;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function create()
     {
         return view('tweets.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
     public function store(Request $request)
     {
@@ -59,44 +40,26 @@ class TweetController extends Controller
             'image' => 'nullable|mimes:jpeg,jpg,png,gif|max:2048'
         ]);
 
-        // create tweet
         $tweet = new \App\Tweet;
         $tweet->body = $request->body;
         $tweet->image = $request->image;
         $tweet->user_id = Auth::id();
         $tweet->save();
 
-        // upload to s3
-        // if (request()->image) {
-        //     $tweet->image = Storage::disk('s3')->put('uploads/tweets/' . $tweet->id, request()->image, 'public');
-        // }
             if ($tweet->save()) {
                 return redirect($tweet->path());
             }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function show($id)
     {
-        // Load single tweet from DB by it's ID
         $tweet = \App\Tweet::find($id);
         $following = $tweet->user->following->pluck('id')->toArray();
 
         return view('tweets.show', compact('tweet', 'following'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function edit($id)
     {
@@ -104,14 +67,6 @@ class TweetController extends Controller
 
         return view('tweets.edit', compact('tweet'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function update(Request $request, $id)
     {
@@ -124,12 +79,6 @@ class TweetController extends Controller
             return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function destroy($id)
     {
@@ -173,8 +122,8 @@ class TweetController extends Controller
     public function unLike($id)
     {
         $like = \App\Like::where('tweet_id' , $id)
-                                ->where('user_id', Auth::id())
-                                ->first();
+            ->where('user_id', Auth::id())
+            ->first();
 
         if ($like->delete()) {
             return json_encode([
