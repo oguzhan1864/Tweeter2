@@ -7,22 +7,19 @@ use Auth;
 
 class Tweet extends Model
 {
-
-    protected $guarded = [];
-
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Users');
     }
 
     public function likes()
     {
-        return $this->hasMany('App\Like');
+        return $this->hasMany('App\Likes');
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany('App\Comments');
     }
 
     public function getLikedByUserAttribute()

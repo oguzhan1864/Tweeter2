@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = ['body', 'user_id', 'tweeter_id', 'gif'];
+    protected $fillable = ['content', 'users_id', 'tweets_id', 'gif'];
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Users');
     }
 
     public function tweet()
     {
-        return $this->belongsTo('App\Tweet');
+        return $this->belongsTo('App\Tweets');
     }
 }

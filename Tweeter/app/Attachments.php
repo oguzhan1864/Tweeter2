@@ -8,6 +8,6 @@ class Attachment extends Model
 {
     public function tweet()
     {
-        return $this->belongsTo('App\Tweet');
+        return $this->belongsTo('App\Tweets');
     }
 }
